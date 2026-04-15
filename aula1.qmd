@@ -1,0 +1,115 @@
+---
+title: "Relatório de Experimentação: Severidade de Doenças"
+subtitle: "Análise de Eficácia de Fungicida"
+author: "Aula de Experimentação"
+date: "2026-03-11"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: show
+---
+
+## 1. Introdução à Experimentação
+
+Nesta aula, exploramos os conceitos fundamentais de **experimentação agrícola**. O foco inicial foi entender como organizar dados brutos de um ensaio de eficácia de produtos fitossanitários.
+
+A primeira operação realizada foi uma soma simples para testar o ambiente:
+
+```{r}
+#| label: teste-inicial
+a <- 2
+b <- 2
+a + b
+
+```
+
+## 2. Materiais e Métodos
+
+O experimento consistiu em avaliar a **severidade** de uma doença em 8 plantas, divididas em dois grupos:
+
+1. **Controle:** Plantas sem tratamento.
+2. **Fungicida:** Plantas tratadas com o produto teste.
+
+### Estruturação dos Dados no R
+
+Utilizamos o objeto `data.frame` para tabular as observações de cada planta.
+
+```{r}
+#| label: criacao-dados
+#| message: false
+
+library(tidyverse)
+
+dados <- data.frame(
+  planta = seq(1:8),
+  tratamento = c("controle", "controle", "controle", "controle", 
+                 "fungicida", "fungicida", "fungicida", "fungicida"),
+  severidade = c(42, 38, 45, 40, 12, 18, 15, 10)
+)
+
+knitr::kable(dados) # Gera uma tabela formatada no documento
+
+```
+
+## 3. Visualização dos Dados
+
+A visualização é a etapa crítica para entender a dispersão dos dados. Utilizamos o pacote `ggplot2` com as seguintes camadas:
+
+* `geom_jitter`: Para observar cada repetição individualmente sem sobreposição total.
+* `stat_summary`: Para destacar a média aritmética de cada tratamento.
+* `scale_y_continuous`: Para padronizar a escala de 0 a 50%.
+
+```{r}
+#| label: grafico-severidade
+#| fig-cap: "Distribuição da severidade da doença entre os tratamentos."
+
+ggplot(dados, aes(x = tratamento, y = severidade, color = tratamento)) +
+  geom_jitter(width = 0.1, size = 3, alpha = 0.6) +
+  stat_summary(fun = "mean", geom = "point", shape = 18, size = 5, color = "black") +
+  scale_y_continuous(limits = c(0, 50), breaks = seq(0, 50, by = 5)) +
+  theme_classic(base_size = 14) +
+  labs(
+    x = "Tratamento",
+    y = "Severidade (%)",
+    title = "Comparação Visual de Severidade"
+  ) +
+  theme(legend.position = "none")
+
+```
+
+## 4. Análise Estatística
+
+Para confirmar se a redução observada no grupo "fungicida" é estatisticamente diferente do "controle", aplicamos o **Teste t de Student** para amostras independentes.
+
+```{r}
+#| label: teste-estatistico
+
+# Teste t considerando variâncias iguais
+resultado <- t.test(severidade ~ tratamento, data = dados, var.equal = TRUE)
+
+resultado
+
+```
+
+### Interpretação dos Resultados
+
+Com base no **p-valor** obtido (`r round(resultado$p.value, 5)`), podemos concluir se existe ou não evidência estatística para rejeitar a hipótese de que as médias são iguais. Como o valor é significativamente menor que 0.05, o fungicida demonstrou eficácia.
+
+---
+
+*Documento gerado automaticamente para fins acadêmicos.*
+
+```
+
+### O que este arquivo Quarto faz por você:
+1.  **YAML (Cabeçalho):** Define título, autor e o formato de saída (HTML com sumário).
+2.  **Code Chunks (`{r}`):** Separa o código do texto explicativo.
+3.  **Inline Code:** No final do texto, eu usei uma técnica avançada de Quarto (o uso de crases com `r`) para que ele escreva o valor exato do p-valor diretamente no meio da frase.
+4.  **Tabelas:** O comando `knitr::kable` deixa a visualização dos dados muito mais profissional do que um simples `print`.
+
+**Deseja que eu te mostre como renderizar esse arquivo para PDF ou adicionar uma imagem externa a ele?**
+
+```
+
+

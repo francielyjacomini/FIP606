@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: docs
+
+cache: true
+freeze: auto
+
+website:
+  title: "FIP 606"
+  description: "Repositório de aulas da disciplina FIP 606"
+  navbar:
+    background: primary 
+    search: true        
+    left:
+      - text: "Home"
+        icon: house
+        href: index.qmd
+      - text: "Introdução"
+        icon: info-circle-fill
+        href: aula1.qmd
+      - text: "Gráficos"
+        icon: bar-chart-fill
+        href: aula2.qmd
+      - text: "Teste t"
+        icon: calculator-fill
+        href: aula3.qmd
+      - text: "Anova"
+        icon: calculator-fill
+        href: aula4.qmd
+      - text: "Testes de médias"
+        icon: check-all
+        href: aula5.qmd
+
+format:
+  html:
+    theme: zephyr
+    mainfont: "Montserrat"
+    title-block-banner: false      
+    include-in-header:
+      text: |
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+        .navbar {
+          background-color: #d62828 !important;
+        }
+        body {
+          font-family: 'Montserrat', sans-serif;
+        }
+        h1, h2, h3, h4 {
+          font-weight: 700;
+        }
+        </style>
+    fontcolor: "#444444"
+    linkcolor: "#e63946"
+    toc: true
+    toc-title: "Nesta página"
+    number-sections: true 
+    code-fold: true     
+    code-summary: "Mostrar código"
+    code-copy: true     
+    anchor-sections: true
+
+editor: visual
+

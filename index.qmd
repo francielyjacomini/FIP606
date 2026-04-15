@@ -1,0 +1,27 @@
+---
+title: "FIP 606 - Análise e Visualização de Dados em Fitopatologia"
+subtitle: "Repositório de aulas e exercícios práticos"
+number-sections: false
+---
+
+::: {layout-ncol="1"}
+![](homesite.png){fig-align="center" width="500"}
+:::
+
+# Bem-vindos!
+
+Esta página foi criada para organizar os materiais e as análises desenvolvidas durante a disciplina **FIP 606**, oferecida pelo Programa de Pós-graduação em Fitopatologia e ministrada pelo Prof. Emerson Del Ponte. Aqui você encontrará os scripts em R, visualizações de dados e relatórios gerados a partir dos experimentos de fitopatologia.
+
+## O que você encontrará por aqui:
+
+-   **Aulas Práticas:** Scripts detalhados de manipulação de dados.
+-   **Visualização:** Gráficos avançados utilizando `ggplot2`.
+-   **Estatística:** Testes de hipóteses, ANOVA e modelos aplicados.
+
+------------------------------------------------------------------------
+
+::: {.callout-tip style="border-left-color: #7b2cbf; background-color: #f5f0ff" appearance="minimal"}
+## Sobre a Autora
+
+Franciely Jacomini é doutoranda em Fitotecnia pela UFV, apaixonada por citricultura e aprendiz de R. Nas horas vagas, desbravadora, cozinheira, crocheteira.
+:::
